@@ -1,0 +1,65 @@
+#include"Runner.h"
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+void bubbleSort(Runner* runner, int numElements);
+
+int main() 
+{
+	int choice = 0;
+	Runner runner[80];
+	int numElements = 0;
+
+	do
+	{
+		cout << "\nThe Race Menu."
+			<< "\nPlease select one option from the menu:"
+			<< "\n1. Enter Runner."
+			<< "\n2. Sort Runners by time."
+			<< "\n3. Quit." << endl;
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			cin >> runner[numElements];
+			numElements++;
+			break;
+		case 2:
+			bubbleSort(runner, numElements);
+			break;
+		case 3:
+			cout << "Goodbye!" << endl;
+			system("pause");
+			return 0;
+			break;
+		default:
+			cout << "Invalid option, please trye again: " << endl;
+			break;
+		}
+	} while (choice != 3);
+}
+
+void bubbleSort(Runner* runner, int numElements) 
+{
+	int i,
+		minIndex;
+	Runner minValue;
+	for (i = 0; i < numElements; i++) {
+		minIndex = i;
+		minValue = runner[i];
+		for (int index = i; index < numElements; index++) {
+			if (runner[index].getTime() < minValue.getTime()) {
+				minValue = runner[index];
+				minIndex = index;
+			}
+		}
+		runner[minIndex] = runner[i];
+		runner[i] = minValue;
+	}
+
+	for (int i = 0; i < numElements; i++) {
+		cout << runner[i];
+	}
+}
